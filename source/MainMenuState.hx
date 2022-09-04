@@ -187,7 +187,7 @@ class MainMenuState extends MusicBeatState
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{
-			spr.x = 60 + (spr.ID * 160)
+			spr.x = 60 + (spr.ID * 160);
 		});
 	}
 
@@ -207,7 +207,7 @@ class MainMenuState extends MusicBeatState
 			if (spr.ID == curSelected)
 			{
 				spr.animation.play('selected');
-				camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y);
+				camFollow.setPosition(camFollow.x, spr.getGraphicMidpoint().y);
 			}
 
 			spr.updateHitbox();
