@@ -46,7 +46,9 @@ class TitleState extends MusicBeatState
 
 	override public function create():Void
 	{
+		#if html5
 		FlxG.log.redirectTraces = true;
+		#end
 
 		#if polymod
 		// polymod.Polymod.init({modRoot: "mods", dirs: ['introMod']});
@@ -181,7 +183,7 @@ class TitleState extends MusicBeatState
 		// titleText.screenCenter(X);
 		add(titleText);
 
-		var logo:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('logoNE'));
+		var logo:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('logoOP'));
 		logo.screenCenter();
 		logo.antialiasing = true;
 		add(logo);
