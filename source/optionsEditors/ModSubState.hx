@@ -1,4 +1,4 @@
-package;
+package optionsEditors;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -17,6 +17,8 @@ class ModSubState extends MusicBeatSubstate
     var curSelected:Int = 0;
 	var grpOptionsTexts:FlxTypedGroup<FlxText>;
 
+	private var grpControls:FlxTypedGroup<Alphabet>;
+
     public function new():Void
     {
         super();
@@ -29,12 +31,17 @@ class ModSubState extends MusicBeatSubstate
 		grpOptionsTexts = new FlxTypedGroup<FlxText>();
 		add(grpOptionsTexts);
 
-        for (i in 0...modList.length)
-            {
-                var modText:FlxText = new FlxText(20, 20 + (i * 60), 0, modList[i] + ": " + modListVAL[i], 32);
-                modText.ID = i;
-                grpOptionsTexts.add(modText);
-            }
+		grpControls = new FlxTypedGroup<Alphabet>();
+		add(grpControls);
+
+		for (i in 0...modList.length)
+		{
+			var opt:Alphabet = new Alphabet(0, (70 * i) + 30, modList[i], true, false);
+			opt.isMenuItem = true;
+			opt.targetY = i;
+			add(opt);
+			// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !! ma dumbass didnt read this lmao
+		}
     }
     
         override function update(elapsed:Float)
@@ -58,15 +65,20 @@ class ModSubState extends MusicBeatSubstate
 		if (curSelected >= modList.length)
 			curSelected = 0;
 
-		grpOptionsTexts.forEach(function(txt:FlxText)
+		var bullShit:Int = 0;
+
+		for (item in grpControls.members)
 		{
-			txt.alpha = 0.5;
+			item.targetY = bullShit - curSelected;
+			bullShit++;
 
-			if (txt.ID == curSelected)
-				txt.alpha = 1;
+			item.alpha = 0.6;
 
-            txt.text = modList[txt.ID] + ": " + modListVAL[txt.ID];
-		});
+			if (item.targetY == 0)
+			{
+				item.alpha = 1;
+			}
+		}
 
         if (controls.ACCEPT)
             {

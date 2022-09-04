@@ -51,7 +51,7 @@ class OptionsMenu extends MusicBeatState
 
 		super.create();
 
-		openSubState(new ModSubState());
+		openSubState(new OptionsSubState());
 	}
 
 	override function update(elapsed:Float)

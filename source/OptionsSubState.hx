@@ -8,12 +8,14 @@ import flixel.util.FlxColor;
 
 class OptionsSubState extends MusicBeatSubstate
 {
-	var textMenuItems:Array<String> = ['Mods'];
+	var textMenuItems:Array<String> = ['Gameplay', 'Mods'];
 
 	var selector:FlxSprite;
 	var curSelected:Int = 0;
 
 	var grpOptionsTexts:FlxTypedGroup<FlxText>;
+
+	private var grpControls:FlxTypedGroup<Alphabet>;
 
 	public function new()
 	{
@@ -22,14 +24,19 @@ class OptionsSubState extends MusicBeatSubstate
 		grpOptionsTexts = new FlxTypedGroup<FlxText>();
 		add(grpOptionsTexts);
 
+		grpControls = new FlxTypedGroup<Alphabet>();
+		add(grpControls);
+
 		selector = new FlxSprite().makeGraphic(5, 5, FlxColor.RED);
-		add(selector);
+		// add(selector);
 
 		for (i in 0...textMenuItems.length)
 		{
-			var optionText:FlxText = new FlxText(20, 20 + (i * 80), 0, textMenuItems[i], 32);
-			optionText.ID = i;
-			grpOptionsTexts.add(optionText);
+			var opt:Alphabet = new Alphabet(0, (70 * i) + 30, textMenuItems[i], true, false);
+			opt.isMenuItem = true;
+			opt.targetY = i;
+			add(opt);
+			// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !! ma dumbass didnt read this lmao
 		}
 	}
 
@@ -52,25 +59,28 @@ class OptionsSubState extends MusicBeatSubstate
 		if (curSelected >= textMenuItems.length)
 			curSelected = 0;
 
-		grpOptionsTexts.forEach(function(txt:FlxText)
-		{
-			txt.color = FlxColor.WHITE;
+		var bullShit:Int = 0;
 
-			if (txt.ID == curSelected)
-				txt.color = FlxColor.YELLOW;
-		});
+		for (item in grpControls.members)
+		{
+			item.targetY = bullShit - curSelected;
+			bullShit++;
+
+			item.alpha = 0.6;
+
+			if (item.targetY == 0)
+			{
+				item.alpha = 1;
+			}
+		}
 
 		if (controls.ACCEPT)
 		{
 			switch (textMenuItems[curSelected])
 			{
-				case "Controls":
-					FlxG.state.closeSubState();
-					FlxG.state.openSubState(new ControlsSubState());
-
 				case "Mods":
 					FlxG.state.closeSubState();
-					FlxG.state.openSubState(new ModSubState());
+					FlxG.state.openSubState(new optionsEditors.ModSubState());
 			}
 		}
 	}
