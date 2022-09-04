@@ -4,13 +4,6 @@ This is the repository for the Friday Night Funkin Cac-Per Engine.
 
 IF YOU MAKE A MOD AND DISTRIBUTE A MODIFIED / RECOMPILED VERSION, YOU MUST OPEN SOURCE YOUR MOD AS WELL
 
-## Credits / shoutouts
-
-- Portilizen - Programmer
-- Ferkeshu - Music
-- BSOD - Windows Compiling
-- Paul Leps - Artist
-
 ## Build instructions
 
 THESE INSTRUCTIONS ARE FOR COMPILING THE GAME'S SOURCE CODE!!!
