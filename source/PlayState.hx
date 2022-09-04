@@ -1682,7 +1682,8 @@ class PlayState extends MusicBeatState
 							dad.playAnim('singRIGHT' + altAnim, true);
 					}
 
-					if (SONG.song.toLowerCase() == 'thorns' && health >= 2)
+					if (SONG.song.toLowerCase() == 'thorns' && health >= 0.3)
+						vocals.volume = 0.5;
 						health -= 0.015;
 
 					dad.holdTimer = 0;
@@ -2441,8 +2442,7 @@ class PlayState extends MusicBeatState
 		}
 
 		// game bops
-		if (curSong.toLowerCase() == 'senpai' || curSong.toLowerCase() == 'roses' || curSong.toLowerCase() == 'thorns' && curBeat % 4 == 0
-			&& FlxG.camera.zoom < 1.35)
+		if (curSong.toLowerCase() == 'thorns' && curBeat % 4 == 0 && FlxG.camera.zoom < 1.35)
 		{
 			FlxG.camera.zoom += 0.015;
 			camHUD.zoom += 0.04;
