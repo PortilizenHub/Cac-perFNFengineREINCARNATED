@@ -181,7 +181,7 @@ class TitleState extends MusicBeatState
 		// titleText.screenCenter(X);
 		add(titleText);
 
-		var logo:FlxSprite = new FlxSprite(20, 20).loadGraphic(Paths.image('logoCU'));
+		var logo:FlxSprite = new FlxSprite(20, 20).loadGraphic(Paths.image('logoNE'));
 		// logo.screenCenter();
 		logo.antialiasing = true;
 		add(logo);
