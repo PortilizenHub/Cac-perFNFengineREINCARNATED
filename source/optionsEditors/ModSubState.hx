@@ -1,5 +1,6 @@
 package optionsEditors;
 
+import flixel.FlxObject;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
@@ -16,6 +17,8 @@ class ModSubState extends MusicBeatSubstate
 
     var curSelected:Int = 0;
 	var grpOptionsTexts:FlxTypedGroup<FlxText>;
+
+	var camFollow:FlxObject;
 
 	private var grpControls:FlxTypedGroup<Alphabet>;
 
@@ -34,13 +37,14 @@ class ModSubState extends MusicBeatSubstate
 		grpControls = new FlxTypedGroup<Alphabet>();
 		add(grpControls);
 
+		camFollow = new FlxObject(0, 0, 1, 1);
+		add(camFollow);
+
 		for (i in 0...modList.length)
 		{
-			var opt:Alphabet = new Alphabet(0, (70 * i) + 30, modList[i], true, false);
-			opt.isMenuItem = true;
-			opt.targetY = i;
-			add(opt);
-			// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !! ma dumbass didnt read this lmao
+			var optionText:FlxText = new FlxText(20, 20 + (i * 80), 0, modList[i], 32);
+			optionText.ID = i;
+			grpOptionsTexts.add(optionText);
 		}
     }
     
@@ -53,11 +57,11 @@ class ModSubState extends MusicBeatSubstate
         if (FlxG.keys.justReleased.ESCAPE)
             FlxG.switchState(new MainMenuState());
 
-        if (controls.UP_P)
-			curSelected -= 1;
+		if (controls.UP_P)
+            curSelected -= 1;
 
 		if (controls.DOWN_P)
-			curSelected += 1;
+            curSelected += 1;
 
 		if (curSelected < 0)
 			curSelected = modList.length - 1;
@@ -65,20 +69,14 @@ class ModSubState extends MusicBeatSubstate
 		if (curSelected >= modList.length)
 			curSelected = 0;
 
-		var bullShit:Int = 0;
-
-		for (item in grpControls.members)
+		grpOptionsTexts.forEach(function(txt:FlxText)
 		{
-			item.targetY = bullShit - curSelected;
-			bullShit++;
+			txt.color = FlxColor.WHITE;
 
-			item.alpha = 0.6;
+			if (txt.ID == curSelected)
+				txt.color = FlxColor.YELLOW;
+		});
 
-			if (item.targetY == 0)
-			{
-				item.alpha = 1;
-			}
-		}
 
         if (controls.ACCEPT)
             {

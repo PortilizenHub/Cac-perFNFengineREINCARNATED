@@ -32,11 +32,9 @@ class OptionsSubState extends MusicBeatSubstate
 
 		for (i in 0...textMenuItems.length)
 		{
-			var opt:Alphabet = new Alphabet(0, (70 * i) + 30, textMenuItems[i], true, false);
-			opt.isMenuItem = true;
-			opt.targetY = i;
-			add(opt);
-			// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !! ma dumbass didnt read this lmao
+			var optionText:FlxText = new FlxText(20, 20 + (i * 80), 0, textMenuItems[i], 32);
+			optionText.ID = i;
+			grpOptionsTexts.add(optionText);
 		}
 	}
 
@@ -59,20 +57,14 @@ class OptionsSubState extends MusicBeatSubstate
 		if (curSelected >= textMenuItems.length)
 			curSelected = 0;
 
-		var bullShit:Int = 0;
-
-		for (item in grpControls.members)
+		grpOptionsTexts.forEach(function(txt:FlxText)
 		{
-			item.targetY = bullShit - curSelected;
-			bullShit++;
+			txt.color = FlxColor.WHITE;
 
-			item.alpha = 0.6;
+			if (txt.ID == curSelected)
+				txt.color = FlxColor.YELLOW;
+		});
 
-			if (item.targetY == 0)
-			{
-				item.alpha = 1;
-			}
-		}
 
 		if (controls.ACCEPT)
 		{

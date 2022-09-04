@@ -8,26 +8,26 @@ import flixel.util.FlxColor;
 
 class GameplaySubState extends MusicBeatSubstate
 {
-    var gameplayList:Array<String> = ['game over sprites'];
+	var gameplayList:Array<String> = ['game over sprites'];
 	var gameplayListVAL:Array<Bool> = [gameOverSPR];
 
 	public static var gameOverSPR:Bool = false;
 
-    var curSelected:Int = 0;
-	var grpOptionsTexts:FlxTypedGroup<Alphabet>;
+	var curSelected:Int = 0;
+	var grpOptionsTexts:FlxTypedGroup<FlxText>;
 
 	private var grpControls:FlxTypedGroup<Alphabet>;
 
-    public function new():Void
-    {
-        super();
-    }
+	public function new():Void
+	{
+		super();
+	}
 
-    override function create()
-    {
-        super.create();
+	override function create()
+	{
+		super.create();
 
-		grpOptionsTexts = new FlxTypedGroup<Alphabet>();
+		grpOptionsTexts = new FlxTypedGroup<FlxText>();
 		add(grpOptionsTexts);
 
 		grpControls = new FlxTypedGroup<Alphabet>();
@@ -35,24 +35,22 @@ class GameplaySubState extends MusicBeatSubstate
 
 		for (i in 0...gameplayList.length)
 		{
-			var opt:Alphabet = new Alphabet(0, (70 * i) + 30, gameplayList[i], true, false);
-			opt.isMenuItem = true;
-			opt.targetY = i;
-			add(opt);
-			// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !! ma dumbass didnt read this lmao
+			var optionText:FlxText = new FlxText(20, 20 + (i * 80), 0, gameplayList[i], 32);
+			optionText.ID = i;
+			grpOptionsTexts.add(optionText);
 		}
-    }
-    
-        override function update(elapsed:Float)
-    {
-        super.update(elapsed);
+	}
+
+	override function update(elapsed:Float)
+	{
+		super.update(elapsed);
 
 		gameplayListVAL = [gameOverSPR];
 
-        if (FlxG.keys.justReleased.ESCAPE)
-            FlxG.switchState(new MainMenuState());
+		if (FlxG.keys.justReleased.ESCAPE)
+			FlxG.switchState(new MainMenuState());
 
-        if (controls.UP_P)
+		if (controls.UP_P)
 			curSelected -= 1;
 
 		if (controls.DOWN_P)
@@ -64,32 +62,25 @@ class GameplaySubState extends MusicBeatSubstate
 		if (curSelected >= gameplayList.length)
 			curSelected = 0;
 
-		var bullShit:Int = 0;
-
-		for (item in grpControls.members)
+		grpOptionsTexts.forEach(function(txt:FlxText)
 		{
-			item.targetY = bullShit - curSelected;
-			bullShit++;
+            txt.color = FlxColor.WHITE;
 
-			item.alpha = 0.6;
+			if (txt.ID == curSelected)
+				txt.color = FlxColor.YELLOW;
+		});
 
-			if (item.targetY == 0)
+		if (controls.ACCEPT)
+		{
+			switch (gameplayList[curSelected])
 			{
-				item.alpha = 1;
-			}
-		}
-
-        if (controls.ACCEPT)
-            {
-                switch (gameplayList[curSelected])
-                {
 				case 'game over sprites':
 					if (gameOverSPR == false)
 						gameOverSPR = true;
 					else if (gameOverSPR == true)
 						gameOverSPR = false;
 					trace('game over sprites: ' + gameOverSPR);
-                }
-            }
-    }
+			}
+		}
+	}
 }
