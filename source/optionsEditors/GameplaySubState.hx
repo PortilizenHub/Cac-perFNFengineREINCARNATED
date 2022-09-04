@@ -8,8 +8,10 @@ import flixel.util.FlxColor;
 
 class GameplaySubState extends MusicBeatSubstate
 {
-    var gameplayList:Array<String> = [''];
-    var gameplayListVAL:Array<Bool> = [];
+    var gameplayList:Array<String> = ['game over sprites'];
+	var gameplayListVAL:Array<Bool> = [gameOverSPR];
+
+	public static var gameOverSPR:Bool = false;
 
     var curSelected:Int = 0;
 	var grpOptionsTexts:FlxTypedGroup<Alphabet>;
@@ -45,7 +47,7 @@ class GameplaySubState extends MusicBeatSubstate
     {
         super.update(elapsed);
 
-        gameplayListVAL = [];
+		gameplayListVAL = [gameOverSPR];
 
         if (FlxG.keys.justReleased.ESCAPE)
             FlxG.switchState(new MainMenuState());
@@ -81,7 +83,12 @@ class GameplaySubState extends MusicBeatSubstate
             {
                 switch (gameplayList[curSelected])
                 {
-                    
+				case 'game over sprites':
+					if (gameOverSPR == false)
+						gameOverSPR = true;
+					else if (gameOverSPR == true)
+						gameOverSPR = false;
+					trace('game over sprites: ' + gameOverSPR);
                 }
             }
     }

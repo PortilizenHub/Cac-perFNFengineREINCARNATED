@@ -35,3 +35,5 @@ trace('myMod: ' + myModVAR);
 ```
 
 now comes to the part of adding your mod, depending on the mod you will need to modify different files, or a file. I cannot document this process since i dont know what kind of mod you want to make, but as long as you know haxe, you can do it, I beleive in you.
+
+same goes with other options, they work mostly the same
