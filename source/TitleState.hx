@@ -168,7 +168,7 @@ class TitleState extends MusicBeatState
 		gfDance.animation.addByIndices('danceLeft', 'gfDance', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
 		gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
 		gfDance.antialiasing = true;
-		add(gfDance);
+		// add(gfDance);
 		// add(logoBl);
 
 		titleText = new FlxSprite(100, FlxG.height * 0.8);
@@ -182,8 +182,9 @@ class TitleState extends MusicBeatState
 		add(titleText);
 
 		var logo:FlxSprite = new FlxSprite(20, 20).loadGraphic(Paths.image('logoNE'));
-		// logo.screenCenter();
+		logo.screenCenter();
 		logo.antialiasing = true;
+		logo.setGraphicSize(1);
 		add(logo);
 
 		// FlxTween.tween(logoBl, {y: logoBl.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG});
