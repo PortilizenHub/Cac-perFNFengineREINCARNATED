@@ -57,6 +57,8 @@ class PlayState extends MusicBeatState
 	public static var storyWeek:Int = 0;
 	public static var storyPlaylist:Array<String> = [];
 	public static var storyDifficulty:Int = 1;
+	public static var beat:Int = 0;
+	public static var step:Int = 0;
 
 	var halloweenLevel:Bool = false;
 
@@ -1390,6 +1392,9 @@ class PlayState extends MusicBeatState
 				// phillyCityLights.members[curLight].alpha -= (Conductor.crochet / 1000) * FlxG.elapsed;
 		}
 
+		beat = curBeat;
+		step = curStep;
+
 		super.update(elapsed);
 
 		hudTxt.text = "Score:" + songScore + " Combo Breaks:" + songMiss;
@@ -1533,10 +1538,7 @@ class PlayState extends MusicBeatState
 						camFollow.x = boyfriend.getMidpoint().x - 300;
 					case 'mall':
 						camFollow.y = boyfriend.getMidpoint().y - 200;
-					case 'school':
-						camFollow.x = boyfriend.getMidpoint().x - 200;
-						camFollow.y = boyfriend.getMidpoint().y - 200;
-					case 'schoolEvil':
+					case 'school' | 'schoolEvil':
 						camFollow.x = boyfriend.getMidpoint().x - 200;
 						camFollow.y = boyfriend.getMidpoint().y - 200;
 				}
@@ -1689,10 +1691,6 @@ class PlayState extends MusicBeatState
 						case 3:
 							dad.playAnim('singRIGHT' + altAnim, true);
 					}
-
-					if (SONG.song.toLowerCase() == 'thorns' && health >= 0.3)
-						vocals.volume = 0.5;
-						health -= 0.015;
 
 					dad.holdTimer = 0;
 
@@ -2449,18 +2447,6 @@ class PlayState extends MusicBeatState
 			camHUD.zoom += 0.03;
 		}
 
-		// game bops
-		if (curSong.toLowerCase() == 'thorns' && curBeat % 4 == 0 && FlxG.camera.zoom < 1.35)
-		{
-			FlxG.camera.zoom += 0.015;
-			camHUD.zoom += 0.04;
-		}
-		else
-		{
-			FlxG.camera.zoom -= 0.015;
-			camHUD.zoom -= 0.04;
-		}
-
 		if (curBeat % 8 == 7 && curSong == 'Bopeebo')
 		{
 			boyfriend.playAnim('hey', true);
@@ -2517,6 +2503,15 @@ class PlayState extends MusicBeatState
 		if (isHalloween && FlxG.random.bool(10) && curBeat > lightningStrikeBeat + lightningOffset)
 		{
 			lightningStrikeShit();
+		}
+
+		if (SONG.song.toLowerCase() == "thorns" && Events.checkBEATnSTEPS(64, 258))
+		{
+			trace('lolaleoaloslaoslaosl event 64 258');
+
+			camFollow.setPosition(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
+			camFollow.x = boyfriend.getMidpoint().x - 8000000000000000000000000000000;
+			camFollow.y = boyfriend.getMidpoint().y - 8000000000000000000000000000000;
 		}
 	}
 

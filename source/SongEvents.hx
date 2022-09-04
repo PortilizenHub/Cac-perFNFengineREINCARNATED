@@ -28,4 +28,14 @@ class Events extends MusicBeatState
 
 		return;
 	}
+
+	inline public static function checkBEATnSTEPS(beat:Int = 0, step:Int = 0)
+	{
+		var bool:Bool = false;
+
+		if (PlayState.beat == beat && PlayState.step == step)
+			bool = true;
+
+		return bool;
+	}
 }
