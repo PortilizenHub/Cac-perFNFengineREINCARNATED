@@ -15,7 +15,7 @@ class HealthIcon extends FlxSprite
 
 		loadGraphic(Paths.image('iconGrid'), true, 150, 150);
 
-		if (ModSubState.iconModVAR == true)
+		if (optionsEditors.ModSubState.iconModVAR == true)
 			alpha = 0;
 
 		antialiasing = true;

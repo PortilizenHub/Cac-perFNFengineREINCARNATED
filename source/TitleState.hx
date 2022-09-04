@@ -56,9 +56,9 @@ class TitleState extends MusicBeatState
 
 		PlayerSettings.init();
 
-		if (ModSubState.introModVAR == false)
+		if (optionsEditors.ModSubState.introModVAR == false)
 			curWacky = FlxG.random.getObject(getIntroTextShit());
-		else if (ModSubState.introModVAR == true)
+		else if (optionsEditors.ModSubState.introModVAR == true)
 			curWacky = FlxG.random.getObject(getModIntroTextShit());
 
 		// DEBUG BULLSHIT
