@@ -73,6 +73,10 @@ class OptionsSubState extends MusicBeatSubstate
 				case "Mods":
 					FlxG.state.closeSubState();
 					FlxG.state.openSubState(new optionsEditors.ModSubState());
+			
+				case "Gameplay":
+					FlxG.state.closeSubState();
+					FlxG.state.openSubState(new optionsEditors.GameplaySubState());
 			}
 		}
 	}
