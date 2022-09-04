@@ -43,6 +43,8 @@ import openfl.display.StageQuality;
 import openfl.filters.ShaderFilter;
 import lime.app.Application;
 import SongEvents.Events;
+import openfl.filters.BitmapFilter;
+import openfl.filters.ShaderFilter;
 // import vlc.MP4Handler;
 
 using StringTools;
@@ -79,6 +81,8 @@ class PlayState extends MusicBeatState
 
 	private var camZooming:Bool = false;
 	private var curSong:String = "";
+
+	var filters:Array<BitmapFilter> = [];
 
 	private var gfSpeed:Int = 1;
 	private var health:Float = 1;
@@ -150,6 +154,10 @@ class PlayState extends MusicBeatState
 		camHUD.bgColor.alpha = 0;
 
 		FlxG.cameras.reset(camGame);
+
+		FlxG.game.setFilters(filters);
+		FlxG.game.filtersEnabled = true;
+
 		FlxG.cameras.add(camHUD);
 
 		FlxCamera.defaultCameras = [camGame];
