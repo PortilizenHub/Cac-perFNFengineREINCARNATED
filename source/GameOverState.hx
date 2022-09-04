@@ -1,5 +1,6 @@
 package;
 
+import optionsEditors.GameplaySubState;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.transition.FlxTransitionableState;
@@ -32,7 +33,8 @@ class GameOverState extends FlxTransitionableState
 
 		var bf:Boyfriend = new Boyfriend(bfX, bfY);
 		// bf.scrollFactor.set();
-		add(bf);
+		if (optionsEditors.GameplaySubState.gameOverSPR = true)
+			add(bf);
 		bf.playAnim('firstDeath');
 
 		FlxG.camera.follow(bf, LOCKON, 0.001);
