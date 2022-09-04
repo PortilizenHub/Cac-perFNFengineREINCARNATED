@@ -183,14 +183,14 @@ class TitleState extends MusicBeatState
 		// titleText.screenCenter(X);
 		add(titleText);
 
-		var logo:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('logoOP'));
+		var logo:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('logoNU'));
 		logo.screenCenter(X);
 		logo.screenCenter(Y);
 		logo.antialiasing = true;
 		add(logo);
 
 		// FlxTween.tween(logoBl, {y: logoBl.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG});
-		FlxTween.tween(logo, {y: logoBl.y + 40}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG, startDelay: 0.1});
+		FlxTween.tween(logo, {y: logoBl.y + 20}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG, startDelay: 0.1});
 
 		credGroup = new FlxGroup();
 		add(credGroup);
